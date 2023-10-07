@@ -11,10 +11,17 @@ jobs:
   UserRepositoryFor-AWSBedrock-CodeReview-Job:
     runs-on: ubuntu-latest
     steps:
-      - run: git clone https://github.com/7empestx/AWSBedrock-CodeReview.git
-      - run: cd AWSBedrock-CodeReview
-      - run: npm run start
+      - name: Clone the repository
+        run: git clone https://github.com/7empestx/AWSBedrock-CodeReview.git
+
+      - name: Run npm start
+        working-directory: ./AWSBedrock-CodeReview
+        run: |
+          npm install # This assumes you have a package.json in AWSBedrock-CodeReview repository
+          npm run start
+
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+
       - run: echo "🍏 This job's status is ${{ job.status }}."
