@@ -1,0 +1,18 @@
+name: UserRepositoryFor-AWSBedrock-CodeReview
+run-name: ${{ github.actor }} is doing an AWS Bedrock Code Review
+on: 
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  UserRepositoryFor-AWSBedrock-CodeReview-Job:
+    runs-on: ubuntu-latest
+    steps:
+      - run: git clone https://github.com/7empestx/AWSBedrock-CodeReview.git
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
