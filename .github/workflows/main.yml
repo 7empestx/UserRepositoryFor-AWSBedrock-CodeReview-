@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: git clone https://github.com/7empestx/AWSBedrock-CodeReview.git
+      - run: cd AWSBedrock-CodeReview
+      - run: npm run start
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
