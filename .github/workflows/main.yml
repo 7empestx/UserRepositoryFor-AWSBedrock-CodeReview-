@@ -11,17 +11,23 @@ jobs:
   UserRepositoryFor-AWSBedrock-CodeReview-Job:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone the repository
-        run: git clone https://github.com/7empestx/AWSBedrock-CodeReview.git
-
-      - name: Run npm start
-        working-directory: ./AWSBedrock-CodeReview
-        run: |
-          npm install # This assumes you have a package.json in AWSBedrock-CodeReview repository
-          npm run start
-
-      - name: List files in the repository
-        run: |
+       - name: Checkout repository
+         uses: actions/checkout@v2
+       - name: Set up AWS credentials
+         uses: aws-actions/configure-aws-credentials@v1
+         with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-west-2
+       - name: Clone the repository
+         uses: 
+            run: git clone https://github.com/7empestx/AWSBedrock-CodeReview.git
+       - name: Run npm start
+         working-directory: ./AWSBedrock-CodeReview
+         run: | 
+              npm install 
+              npm run start
+       - name: List files in the repository
+         run: |
           ls ${{ github.workspace }}
-
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+       - run: echo "🍏 This job's status is ${{ job.status }}."
